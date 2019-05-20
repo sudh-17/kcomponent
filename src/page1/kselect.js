@@ -352,4 +352,6 @@ let qs = function(selector ,parent){
   let kselect = {}
   kselect.init = init
 
-  export default kselect
+  global.kselect = kselect
+
+  //export default kselect

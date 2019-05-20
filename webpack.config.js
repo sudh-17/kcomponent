@@ -95,7 +95,7 @@ module.exports={
         new htmlWebpackPlugin({
             filename:'page1.html',//HTML文件名称
             template: './src/page1/index.html', //HTML模板
-            inject: 'body',
+            inject: 'head',
             chunks: ['page1'] //对应entry入口的js，按需加载js
         }),
         new htmlWebpackPlugin({

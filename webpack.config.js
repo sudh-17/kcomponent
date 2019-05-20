@@ -8,7 +8,7 @@ module.exports={
     context: __dirname,//上下文
     entry: {
         kselect: __dirname +  '/src/kselect/index.js',
-        page2: __dirname +  '/src/page2/app.js',
+        klist: __dirname +  '/src/klist/index.js',
     },
     output:{
         path: __dirname+'/dist/',
@@ -99,10 +99,10 @@ module.exports={
             chunks: ['kselect'] //对应entry入口的js，按需加载js
         }),
         new htmlWebpackPlugin({
-            filename:'page2.html',//HTML文件名称
-            template: './src/page2/index.html', //HTML模板
-            inject: 'body',
-            chunks: ['page2'] //对应entry入口的js，按需加载js
+            filename:'klist.html',//HTML文件名称
+            template: './src/klist/index.html', //HTML模板
+            inject: 'head',
+            chunks: ['klist'] //对应entry入口的js，按需加载js
         })
     ]
 }

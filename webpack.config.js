@@ -7,7 +7,7 @@ var path = require('path');
 module.exports={
     context: __dirname,//上下文
     entry: {
-        page1: __dirname +  '/src/page1/index.js',
+        kselect: __dirname +  '/src/kselect/index.js',
         page2: __dirname +  '/src/page2/app.js',
     },
     output:{
@@ -93,10 +93,10 @@ module.exports={
     plugins:[
         //html插件
         new htmlWebpackPlugin({
-            filename:'page1.html',//HTML文件名称
-            template: './src/page1/index.html', //HTML模板
+            filename:'kselect.html',//HTML文件名称
+            template: './src/kselect/index.html', //HTML模板
             inject: 'head',
-            chunks: ['page1'] //对应entry入口的js，按需加载js
+            chunks: ['kselect'] //对应entry入口的js，按需加载js
         }),
         new htmlWebpackPlugin({
             filename:'page2.html',//HTML文件名称

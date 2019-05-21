@@ -12,6 +12,9 @@ function Controller(dom, data, multiple = false) {
     this.view = new View(dom, multiple)
     this.multiple = multiple
     this.initAction()
+    //测试
+    this.loadData()
+    this.view.modal('show')
 }
 //加载数据
 Controller.prototype.loadData = function () {
@@ -48,10 +51,6 @@ Controller.prototype.initAction = function () {
     this.view.cancelAction(function () {
         self.view.modal('hide')
     })
-    /*this.view.tagAction(function (id) {
-    self.view.removeTag(id)
-    self.model.unChecked(id)
-    })*/
     this.view.itemAction(function (key, value) {
         self.model.checked(key)
         self.view.setValue(value)

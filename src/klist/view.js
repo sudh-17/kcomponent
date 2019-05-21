@@ -1,10 +1,10 @@
 import { qs, qsa, $delegated, $insertAfter, createUUID } from '../util/common.js'
 
 /**
-     * View
-     * @param {挂载节点} dom 
-     * @param {是否多选} multiple 
-     */
+ * View
+ * @param {挂载节点} dom 
+ * @param {是否多选} multiple 
+ */
 function View(dom, multiple = false) {
     this.dom = dom
     this.parent = dom.parentNode

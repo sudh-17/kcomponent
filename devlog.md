@@ -8,3 +8,6 @@
   },
 ```
 > 在启动webpack-dev-serve 的脚本加上 --host 0.0.0.0就可以了
+
+### vscode 代码对齐
+> window: shift + alt + f

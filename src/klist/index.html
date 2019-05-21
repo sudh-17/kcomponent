@@ -10,15 +10,18 @@
     <div>
       <h3>单选模式</h3>
       <button id="btnGet">获取值</button>
-      <div id="select"></div>
+      <input id="select"/>
     </div>
     <div>
-        <h3>多选模式</h3>
-        <button id="btnGet2">获取值</button>
-        <div id="select2"></div>
+      <h3>多选模式</h3>
+      <button id="btnGet2">获取值</button>
+      <input id="select2"/>
     </div>
 
     <script>
+
+      let input = document.getElementById('select')
+      console.log(input)
       const data = [
   {
     "key": "C76Be67E-ccae-EcBC-7Fd5-B7e12C1d18E1",
@@ -83,10 +86,10 @@
   document.getElementById('btnGet2').addEventListener('click', function () {
     alert(multi.getValue())
   })
-  single.setOption({
-    width: '100vw',
-    height: '10px'
-  })
+  // single.setOption({
+  //   width: '100vw',
+  //   height: '10px'
+  // })
     </script>
   </body>
 </html>

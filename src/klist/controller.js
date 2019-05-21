@@ -22,24 +22,24 @@ import View from './view.js'
   Controller.prototype.initAction = function () {
       let self = this
       this.view.contentAction(function(e){
-      self.loadData()
-      self.view.modal('show')
-      self.view.setSearchText('')
+        self.loadData()
+        self.view.modal('show')
+        self.view.setSearchText('')
       })
       this.view.searchAction(function(keyword){
-      let data = self.model.search(keyword, self.multiple)
-      self.view.renderList(data)
+        let data = self.model.search(keyword, self.multiple)
+        self.view.renderList(data)
       })
       this.view.okAction(function (data) {
-      if(data && data.length > 0) {
-          if (self.multiple == false) {
-          self.model.checked(data[0].key)
-          self.view.setValue(data[0].value)
-          } else {
-          self.model.multiChecked(data)
-          data.forEach(it => {
-              self.view.appendTag(it)
-          })
+        if(data && data.length > 0) {
+            if (self.multiple == false) {
+                self.model.checked(data[0].key)
+                self.view.setValue(data[0].value)
+            } else {
+                self.model.multiChecked(data)
+                data.forEach(it => {
+                self.view.appendTag(it)
+            })
           }
       }
       self.view.modal('hide')
@@ -47,14 +47,14 @@ import View from './view.js'
       this.view.cancelAction(function () {
       self.view.modal('hide')
       })
-      this.view.tagAction(function (id) {
-      self.view.removeTag(id)
-      self.model.unChecked(id)
-      })
+      /*this.view.tagAction(function (id) {
+        self.view.removeTag(id)
+        self.model.unChecked(id)
+      })*/
       this.view.itemAction(function (key, value) {
-      self.model.checked(key)
-      self.view.setValue(value)
-      self.view.modal('hide')
+        self.model.checked(key)
+        self.view.setValue(value)
+        self.view.modal('hide')
       })
   }
   

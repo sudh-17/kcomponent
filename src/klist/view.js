@@ -1,4 +1,4 @@
-import {qs, qsa, $delegated} from '../util/common.js'
+import {qs, qsa, $delegated, $insertAfter, createUUID} from '../util/common.js'
 
 /**
      * View
@@ -7,11 +7,16 @@ import {qs, qsa, $delegated} from '../util/common.js'
      */
     function View (dom, multiple = false) {
       this.dom = dom
+      this.parent = dom.parentNode
       this.multiple = multiple
+      this.dom.className = 'content'
+      this.dom.readOnly = true
+      let inputHTML = this.dom.outerHTML
+      let uuid = createUUID()
       let html = 
-          `<div class="wrapper">
+          `<div class="wrapper" w-id="${uuid}">
               <div class="content-container">
-                  ${ this.multiple ? '<ul class="content"></ul>' : '<input class="content"  readonly/>' }
+                 ${inputHTML} 
               </div>
               <div class="panel">
                   <div class="panel-header">
@@ -28,12 +33,13 @@ import {qs, qsa, $delegated} from '../util/common.js'
               </div>
               <div class="backdrop"></div>
           </div>`
-      dom.innerHTML = html
-      this.content = qs('.content', dom)
-      this.panel = qs('.panel', dom)
-      this.search = qs('.search', dom)
-      this.list = qs('.panel-list', dom)
-      this.backdrop = qs('.backdrop', dom)
+          this.dom.outerHTML = html
+          this.dom = qs(`[w-id="${ uuid }"]`, this.parent)
+          this.content = qs('.content', this.dom)
+          this.panel = qs('.panel', this.dom)
+          this.search = qs('.search', this.dom)
+          this.list = qs('.panel-list', this.dom)
+          this.backdrop = qs('.backdrop', this.dom)
   }
   
   View.prototype.template = function (item) {

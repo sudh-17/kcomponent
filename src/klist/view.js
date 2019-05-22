@@ -20,8 +20,11 @@ function View(dom, multiple = false) {
                  ${inputHTML} 
               </div>
               <div class="kpanel">
+                <div class="kpanel-header">
+                    <input name="search" class="search">
+                </div>
                   <div class="kpanel-content">
-                     <div class="ktreeRoot"></div>
+                    <div class="ktreeRoot"></div>
                   </div>
                   <div class="kpanel-footer">
                     <div class="bt-gb"><button class="cancel">关闭</button></div>
@@ -32,11 +35,11 @@ function View(dom, multiple = false) {
     this.dom.outerHTML = html
     this.dom = qs(`[w-id="${uuid}"]`, this.parent)
     this.content = qs('.content', this.dom)
+    this.searchText = qs('.search', this.dom)
     this.tree = qs('.ktreeRoot', this.dom)
     this.$tree = $(this.tree)
     this.panel = qs('.kpanel', this.dom)
     this.backdrop = qs('.backdrop', this.dom)
-
     this.set = new Set()
 }
 
@@ -44,9 +47,14 @@ View.prototype.initTree = function (data) {
     let self = this
     this.$tree.treeview({
         data: data,
-        showIcon: false,
-        showCheckbox: true,
-        onNodeChecked: function (event, node) {
+        showIcon: true,
+        showTags: true,
+        nodeIcon: 'glyphicon glyphicon-unchecked',
+        selectedIcon: 'glyphicon glyphicon-check',
+        showCheckbox: false,
+        multiSelect: false,
+        highlightSelected: false,
+        onNodeSelected: function (event, node) {
             let arr = []
             self.set.add(node.text)
             self.set.forEach(item => {
@@ -54,7 +62,7 @@ View.prototype.initTree = function (data) {
             })
             self.setValue(arr.join(','))
         },
-        onNodeUnchecked: function (event, node) {
+        onNodeUnselected: function (event, node) {
             let arr = []
             self.set.delete(node.text)
             self.set.forEach(item => {
@@ -85,11 +93,15 @@ View.prototype.getValue = function () {
 }
 
 View.prototype.getSearchText = function () {
-    return this.search.value
+    return this.searchText.value
 }
 
 View.prototype.setSearchText = function (text) {
-    return this.search.value = text
+    return this.searchText.value = text
+}
+
+View.prototype.search = function (keyword) {
+    this.$tree.treeview('search', [ keyword, { ignoreCase: true, exactMatch: false } ]);
 }
 
 View.prototype.contentAction = function (callback) {
@@ -99,11 +111,10 @@ View.prototype.contentAction = function (callback) {
     })
 }
 
-View.prototype.okAction = function (callback) {
-    let self = this
-    $delegated(this.dom, '.ok', 'click', function (e) {
-        
-        callback.call(this, data)
+View.prototype.searchAction = function (callback) {
+    $delegated(this.dom, '.search', 'input', function (e) {
+        let value = e.target.value
+        callback.call(this, value)
     })
 }
 

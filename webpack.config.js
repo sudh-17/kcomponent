@@ -8,7 +8,7 @@ module.exports={
     context: __dirname,//上下文
     entry: {
         kselect: __dirname +  '/src/kselect/index.js',
-        klist: __dirname +  '/src/klist/index.js',
+        ktree: __dirname +  '/src/ktree/index.js',
     },
     output:{
         path: __dirname+'/dist/',
@@ -92,7 +92,7 @@ module.exports={
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
-                  limit: 10000
+                  limit: 100000
                 }
             }
         ]
@@ -106,10 +106,10 @@ module.exports={
             chunks: ['kselect'] //对应entry入口的js，按需加载js
         }),
         new htmlWebpackPlugin({
-            filename:'klist.html',//HTML文件名称
-            template: './src/klist/index.html', //HTML模板
+            filename:'ktree.html',//HTML文件名称
+            template: './src/ktree/index.html', //HTML模板
             inject: 'head',
-            chunks: ['klist'] //对应entry入口的js，按需加载js
+            chunks: ['ktree'] //对应entry入口的js，按需加载js
         }),
         new webpack.ProvidePlugin({
             $:'jquery',

@@ -16,82 +16,68 @@ kselect.init(dom, data, multi)， 参数分别为挂载点(dom节点)，数据�
 
 导入目录dist/js下的ktree.min.js
 
->实例构造器  ktree.init(dom, data, multi)
+>实例构造器  ktree.init(dom, data, multi, tag)
 
-ktree.init(dom, data, multi)， 参数分别为挂载点(dom节点)，multi单选多选设置(boolean)，以及数据源（格式如下, text为节点值）
+ktree.init(dom, data, multi)， 参数分别为挂载点(dom节点)，multi单选多选设置(boolean)，tag可以设置隐层或显示子节点量的标签（boolean），data为数据源（格式如下,data是一个数组，数组每个对象就是一个节点，其中text为节点值，tag为节点下的子节点量，nodes为子节点的数组，其内容同上）
 ```
-[
-  {
+[{
     text: 'Parent 1',
-    href: '#parent1',
     tags: ['2'],
     nodes: [
       {
         text: 'Child 1',
-        href: '#child1',
         tags: ['2'],
         nodes: [
           {
             text: 'Grandchild 1',
-            href: '#grandchild1',
             tags: ['0']
           },
           {
             text: 'Grandchild 2',
-            href: '#grandchild2',
             tags: ['0']
           }
         ]
       },
       {
         text: 'Child 2',
-        href: '#child2',
         tags: ['0']
       }
     ]
   },
   {
     text: 'Parent 2',
-    href: '#parent2',
     tags: ['0']
   },
   {
     text: 'Parent 3',
-    href: '#parent3',
     tags: ['0']
   },
   {
     text: 'Parent 4',
-    href: '#parent4',
     tags: ['0'],
     nodes: [
       {
         text: 'Child 1',
-        href: '#child1',
         tags: ['2'],
         nodes: [
           {
             text: 'Grandchild 1',
-            href: '#grandchild1',
             tags: ['0']
           },
           {
             text: 'Grandchild 2',
-            href: '#grandchild2',
             tags: ['0']
           }
         ]
       },
       {
         text: 'Child 2',
-        href: '#child2',
         tags: ['0']
       }
     ]
   },
   {
     text: 'Parent 5',
-    href: '#parent5',
     tags: ['0']
   }
 ];

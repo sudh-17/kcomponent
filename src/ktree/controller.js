@@ -7,9 +7,9 @@ import View from './view.js'
  * @param {数据源} data 
  * @param {多选} multiple 
  */
-function Controller(dom, data, multiple = false) {
+function Controller(dom, data, multiple = false, tag = false) {
     // this.model = new Model(data)
-    this.view = new View(dom, multiple)
+    this.view = new View(dom, multiple, tag)
     this.multiple = multiple
 
     //初始化view

@@ -4,8 +4,8 @@ import $ from 'jquery'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './bootstrap-treeview.min.js'
 
-function init (dom, data, multiple = false) {
-  return new Controller(dom, data, multiple)
+function init (dom, data, multiple = false, tag = false) {
+  return new Controller(dom, data, multiple, tag)
 }
 
 let ktree = {}

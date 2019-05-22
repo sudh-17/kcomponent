@@ -5,10 +5,11 @@ import { qs, qsa, $delegated, createUUID } from '../util/common.js'
  * @param {挂载节点} dom 
  * @param {是否多选} multiple 
  */
-function View(dom, multiple = false) {
+function View(dom, multiple = false, tag = false) {
     this.dom = dom
     this.parent = dom.parentNode
     this.multiple = multiple
+    this.tag = tag
     this.dom.className = 'content'
     this.dom.readOnly = true
     let inputHTML = this.dom.outerHTML
@@ -48,7 +49,7 @@ View.prototype.initTree = function (data) {
     this.$tree.treeview({
         data: data,
         showIcon: true,
-        showTags: true,
+        showTags: self.tag,
         nodeIcon: 'glyphicon glyphicon-unchecked',
         selectedIcon: 'glyphicon glyphicon-check',
         showCheckbox: false,

@@ -52,7 +52,7 @@ View.prototype.initTree = function (data) {
         nodeIcon: 'glyphicon glyphicon-unchecked',
         selectedIcon: 'glyphicon glyphicon-check',
         showCheckbox: false,
-        multiSelect: false,
+        multiSelect: self.multiple,
         highlightSelected: false,
         onNodeSelected: function (event, node) {
             let arr = []

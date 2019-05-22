@@ -11,75 +11,34 @@ function Controller(dom, data, multiple = false) {
     this.model = new Model(data)
     this.view = new View(dom, multiple)
     this.multiple = multiple
+    
+    //初始化动作
     this.initAction()
     //测试
-    this.loadData()
+    //this.loadData()
+    this.view.initTree(data)
     this.view.modal('show')
 }
 //加载数据
 Controller.prototype.loadData = function () {
-    let data = this.model.getAll()
-    this.view.renderList(data)
+   
 }
 //初始化动作
 Controller.prototype.initAction = function () {
     let self = this
-    this.view.contentAction(function (e) {
-        self.loadData()
+    this.view.contentAction(function () {
         self.view.modal('show')
-        self.view.setSearchText('')
-    })
-    this.view.searchAction(function (keyword) {
-        let data = self.model.search(keyword)
-        self.view.renderList(data)
     })
     this.view.okAction(function (data) {
-        if (self.multiple == false) {
-            self.model.checked(data[0].key)
-            self.view.setValue(data[0].value)
-        } else {
-            self.model.multiChecked(data)
-            let list = self.model.getChecked()
-            let values = []
-            list.forEach(it => {
-                values.push(it.value)
-            })
-            self.view.setValue(values.join(','))
-        }
         self.view.modal('hide')
     })
     this.view.cancelAction(function () {
         self.view.modal('hide')
     })
-    this.view.itemAction(function (key, value) {
-        self.model.checked(key)
-        self.view.setValue(value)
-        self.view.modal('hide')
-    })
 }
 
 Controller.prototype.getValue = function () {
-    let value = []
-    let src = this.model.getChecked()
-    src.forEach(item => {
-        value.push(item.value)
-    })
-    if (this.multiple) {
-        return value
-    } else {
-        return value.join('')
-    }
-}
-
-Controller.prototype.setOption = function (opt) {
-    let option = {
-        width: '80vw',
-        ...opt
-    }
-    this.view.setWidth(option.width)
-    if (option.height) {
-        this.view.setHeight(option.height)
-    }
+    
 }
 
 export default Controller

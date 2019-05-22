@@ -2,7 +2,7 @@ var htmlWebpackPlugin = require('html-webpack-plugin')//导入webpack的HTML插�
 var path = require('path');
 //var precss = require('precss');
 //var autoprefixer = require('autoprefixer');
-// var webpack = require('webpack');
+var webpack = require('webpack');
 
 module.exports={
     context: __dirname,//上下文
@@ -68,7 +68,7 @@ module.exports={
                 ]
             },
             {
-                test: /\.(png|jpg|gif)/i,
+                test: /\.(png|jpg|gif|svg)/i,
                 //使用base64方式编译图片
                 use: [{
                         loader: 'url-loader',
@@ -87,6 +87,13 @@ module.exports={
                         }
                 }],*/
                 
+            },
+            {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                  limit: 10000
+                }
             }
         ]
     },
@@ -103,6 +110,11 @@ module.exports={
             template: './src/klist/index.html', //HTML模板
             inject: 'head',
             chunks: ['klist'] //对应entry入口的js，按需加载js
+        }),
+        new webpack.ProvidePlugin({
+            $:'jquery',
+            jQuery: 'jquery'
+           // 'window.jQuery': 'jquery'
         })
     ]
 }

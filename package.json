@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack --config webpack.config.js --mode development --progress --dispaly-modules --colors --display-reasons",
+    "webpack": "webpack --config webpack.config.js --mode production --progress --dispaly-modules --colors --display-reasons",
     "serve": "webpack-dev-server --inline  --host 0.0.0.0"
   },
   "author": "",
@@ -13,11 +13,13 @@
   "dependencies": {
     "autoprefixer": "^9.5.1",
     "babel-loader": "^8.0.6",
+    "bootstrap": "3",
     "css-loader": "^2.1.1",
     "file-loader": "^3.0.1",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "image-webpack-loader": "^4.6.0",
+    "jquery": "^3.4.1",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
     "postcss-loader": "^3.0.0",

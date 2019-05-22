@@ -604,6 +604,11 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   resolved "http://r.cnpmjs.org/boolbase/download/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
 
+bootstrap@3:
+  version "3.4.1"
+  resolved "http://r.cnpmjs.org/bootstrap/download/bootstrap-3.4.1.tgz#c3a347d419e289ad11f4033e3c4132b87c081d72"
+  integrity sha1-w6NH1Bniia0R9AM+PEEyuHwIHXI=
+
 brace-expansion@^1.1.7:
   version "1.1.11"
   resolved "http://r.cnpmjs.org/brace-expansion/download/brace-expansion-1.1.11.tgz#3c7fcbf529d87226f3d2f52b966ff5271eb441dd"
@@ -3240,6 +3245,11 @@ isurl@^1.0.0-alpha5:
   dependencies:
     has-to-string-tag-x "^1.2.0"
     is-object "^1.0.1"
+
+jquery@^3.4.1:
+  version "3.4.1"
+  resolved "http://r.cnpmjs.org/jquery/download/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
+  integrity sha1-cU8fjZ3eS9+lV2S6N+8hRjDYDvI=
 
 js-yaml@^3.13.1, js-yaml@^3.9.0:
   version "3.13.1"

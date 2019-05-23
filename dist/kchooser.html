@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>kchooser</title>
+  <script type="text/javascript" src="js/kchooser.min.js"></script></head>
+  <body>
+    <div>
+      <h3>单选模式</h3>
+      <button id="btnGet">获取值</button>
+      <input id="select"/>
+    </div>
+    <div>
+      <h3>多选模式</h3>
+      <button id="btnGet2">获取值</button>
+      <input id="select2"/>
+    </div>
+
+    <script>
+      const data = [
+    {
+      "id": "eD317Dd8-a6e2-EAED-a1E2-3Cc62C14b986",
+      "name": "何涛",
+      "department": "一部"
+    },
+    {
+      "id": "5a00dEB9-0E2a-F73E-b2Ce-677C6Fc3ee8e",
+      "name": "毛伟",
+      "department": "三部"
+    },
+    {
+      "id": "b3b937ED-2DB7-9Bfb-e4ff-D975136AdA37",
+      "name": "沈勇",
+      "department": "三部"
+    },
+    {
+      "id": "bd917Afb-2a0B-57fC-4498-DC69eC7dBE5A",
+      "name": "董磊",
+      "department": "二部"
+    },
+    {
+      "id": "0e4ec1AA-CC51-8e74-e385-fae27F5be1b7",
+      "name": "廖杰",
+      "department": "二部"
+    },
+    {
+      "id": "9c63d72c-a6eB-1fbb-cccf-A571Fe3c3ccE",
+      "name": "魏勇",
+      "department": "二部"
+    },
+    {
+      "id": "2dfa72ae-f9F6-2e8A-B73C-121dC26EF4BC",
+      "name": "丁霞",
+      "department": "一部"
+    },
+    {
+      "id": "5F77A58d-5592-3dFd-9845-A9785b6e48Fc",
+      "name": "尹秀英",
+      "department": "二部"
+    },
+    {
+      "id": "d1D92B4b-734A-94Ea-1BEF-dff15CC72ABC",
+      "name": "张军",
+      "department": "三部"
+    },
+    {
+      "id": "9A43E42D-B526-1bbd-43Bb-C683bcfe1Ed3",
+      "name": "夏强",
+      "department": "二部"
+    },
+    {
+      "id": "bcdE287C-5418-c7CE-092c-4F3bE29A5f6D",
+      "name": "刘涛",
+      "department": "三部"
+    },
+    {
+      "id": "8DE5854d-C253-c919-A3FD-22EDD3E13f34",
+      "name": "胡霞",
+      "department": "一部"
+    },
+    {
+      "id": "61eee181-bB17-DedD-FBb9-2DED20E902bE",
+      "name": "易丽",
+      "department": "二部"
+    },
+    {
+      "id": "e0E585FE-4CE9-eBB1-Bb49-11dbbF803C5a",
+      "name": "邵军",
+      "department": "一部"
+    },
+    {
+      "id": "25De72BB-Fe1B-c9bA-bED6-D2C25cA7FeBd",
+      "name": "韩超",
+      "department": "一部"
+    }
+  ]
+
+  let single = kchooser.init(document.getElementById('select'), data, true)
+  document.getElementById('btnGet').addEventListener('click', function () {
+    alert(single.getValue())
+  })
+
+    </script>
+  </body>
+</html>

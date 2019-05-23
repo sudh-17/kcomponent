@@ -9,6 +9,7 @@ module.exports={
     entry: {
         kselect: __dirname +  '/src/kselect/index.js',
         ktree: __dirname +  '/src/ktree/index.js',
+        ktable: __dirname +  '/src/ktable/index.js',
     },
     output:{
         path: __dirname+'/dist/',
@@ -110,6 +111,12 @@ module.exports={
             template: './src/ktree/index.html', //HTML模板
             inject: 'head',
             chunks: ['ktree'] //对应entry入口的js，按需加载js
+        }),
+        new htmlWebpackPlugin({
+            filename:'ktable.html',//HTML文件名称
+            template: './src/ktable/index.html', //HTML模板
+            inject: 'head',
+            chunks: ['ktable'] //对应entry入口的js，按需加载js
         }),
         new webpack.ProvidePlugin({
             $:'jquery',

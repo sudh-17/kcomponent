@@ -53,7 +53,6 @@ function View(dom, multiple = false) {
                     </div>
                   </div>
               </div>
-              <div class="backdrop"></div>
           </div>`
     this.dom.outerHTML = html
     this.dom = qs(`[w-id="${uuid}"]`, this.parent)
@@ -61,7 +60,9 @@ function View(dom, multiple = false) {
     this.panel = qs('.panel', this.dom)
     this.search = qs('.search', this.dom)
     this.list = qs('.panel-list', this.dom)
-    this.backdrop = qs('.backdrop', this.dom)
+    // this.backdrop = qs('.backdrop', this.dom)
+    this.backdrop = document.createElement('div')
+    this.backdrop.className = 'backdrop'
     this.filter = qs('.kfilter', this.dom)
     this.counter = qs('.counter-num', this.dom)
     // this.filterList = qs('.filter-list', this.dom)
@@ -96,10 +97,14 @@ View.prototype.renderList = function (list) {
 View.prototype.modal = function (command) {
     if (command === 'show') {
         this.panel.style.display = 'block'
-        this.backdrop.style.display = 'block'
+        qs('body').appendChild(this.backdrop)
+        let html = qs('html')
+        html.className = html.className + ' pop-modal'
     } else if (command === 'hide') {
         this.panel.style.display = 'none'
-        this.backdrop.style.display = 'none'
+        qs('body').removeChild(this.backdrop)
+        let html = qs('html')
+        html.className = html.className.replace('pop-modal', '')
     } else {
         throw 'view.js的方法modal没有' + command + '命令'
     }

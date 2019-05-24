@@ -7,7 +7,7 @@
     width: 80vw;
     display: none;
     position: absolute;
-    top: 20%;
+    top: 15%;
     left: 50%;
     z-index: 999;
     background: #ffffff;
@@ -197,15 +197,22 @@
       }
     }
   }
-  .backdrop {
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
-    z-index: 998;
-    overflow: hidden;
-  }
+}
+
+.backdrop {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  overflow: hidden;
+}
+
+.pop-modal {
+  position: fixed;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
 }

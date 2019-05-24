@@ -79,7 +79,7 @@ module.exports={
                             name: 'assets/[name]-[hash:5].[ext]' //编译之后的图片的命名规则（文件大于limit才生效）
                         }
                     },
-                    'image-webpack-loader' //图片压缩的loader
+                    // 'image-webpack-loader' //图片压缩的loader
                 ]
                 //使用普通的请求方式编译图片
                 /*use: [{
@@ -94,7 +94,7 @@ module.exports={
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
-                  limit: 100000
+                  limit: 10000
                 }
             }
         ]

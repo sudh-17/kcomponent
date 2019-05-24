@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>klist</title>
+  </head>
+  <body>
+    <div>
+      <h3>单选模式</h3>
+      <button id="btnGet">获取值</button>
+      <input id="select"/>
+    </div>
+
+    <script>
+
+      let input = document.getElementById('select')
+      const data = [
+      {
+        "key": "C76Be67E-ccae-EcBC-7Fd5-B7e12C1d18E1",
+        "value": "叶明"
+      },
+      {
+        "key": "EDedAF3C-DE5c-5c8E-FDAD-e7c1195c6438",
+        "value": "朱强"
+      },
+      {
+        "key": "0be8eBC8-cc7F-beE5-11BB-6cC17A5D32BF",
+        "value": "萧娟"
+      },
+      {
+        "key": "CF96C4F9-e6f2-26Db-A4Eb-c22750FB4408",
+        "value": "万秀兰"
+      },
+      {
+        "key": "4Dd3EC4e-DAaA-EeFC-83f9-e25b896C9FAB",
+        "value": "邱芳"
+      }]
+      let single = miniSelect.init(document.getElementById('select'), data)
+      document.getElementById('btnGet').addEventListener('click', function () {
+        alert(single.getValue())
+      })
+    </script>
+  </body>
+</html>

@@ -67,7 +67,10 @@ Model.prototype.unCheckAll = function () {
     })
 }
 
-Model.prototype.selected = function (obj, callback = function(){}) {
+Model.prototype.selected = function (obj, multi, callback = function(){}) {
+    if (!multi) {
+        this.unCheckAll()
+    }
     for (let i = 0; i < this.data.length; i++) {
         if (obj.id === this.data[i].id) {
             this.data[i].checked = obj.checked

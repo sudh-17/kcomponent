@@ -20,7 +20,14 @@ function View(dom, multiple = false) {
               </div>
               <div class="panel">
                   <div class="panel-header">
-                      <input type="text" class="search" name="search" placeholder="输入关键字搜索"/>
+                    <div class="search-x">
+                        <input type="text" class="search" name="search" placeholder="输入关键字搜索"/>
+                    </div>
+                    <div class="filter-list">
+                        <div class="filter-item"><span class="option" val="all">所有人</span><input name="filter" type="radio"><label class=""/></div>
+                        <div class="filter-item"><span class="option" val="同部门">同部门</span><input name="filter" type="radio"><label class=""/></div>
+                        <div class="filter-item"><span class="option" val="常用人">常用人</span><input name="filter" type="radio"><label class=""/></div>
+                    </div>
                   </div>
                   <div class="panel-content">
                       <ul class="panel-list">
@@ -29,11 +36,12 @@ function View(dom, multiple = false) {
                   <div class="panel-footer">
                     <div class="kfooter-con">
                         <div class="bt-gb">
-                            <select class="kfilter">
+                            <select class="kfilter" style="display: none;">
                             </select>
                         </div>
                         <div class="bt-gb counter-x">
-                            <div class="counter">
+                            
+                            <div class="counter" ${ !this.multiple ? "style=display:none": '' }>
                                 <label>已选</label>
                                 <span class="counter-num"> 0 </span>
                             </div>
@@ -41,7 +49,7 @@ function View(dom, multiple = false) {
                     </div>
                     <div class="kfooter-con">
                         <div class="bt-gb"><button class="cancel">取消</button></div>
-                        ${ this.multiple ? '<div class="bt-gb"><button class="ok btn-primary">确定</button></div>' : ''}
+                        <div class="bt-gb"><button class="ok btn-primary">确定</button></div>
                     </div>
                   </div>
               </div>
@@ -56,6 +64,7 @@ function View(dom, multiple = false) {
     this.backdrop = qs('.backdrop', this.dom)
     this.filter = qs('.kfilter', this.dom)
     this.counter = qs('.counter-num', this.dom)
+    // this.filterList = qs('.filter-list', this.dom)
 }
 
 View.prototype.template = function (item) {
@@ -120,21 +129,10 @@ View.prototype.contentAction = function (callback) {
     })
 }
 
-View.prototype.okAction = function (callback) {
+View.prototype.okAction = function (callback = function(){}) {
     let self = this
     $delegated(this.dom, '.ok', 'click', function (e) {
-        let items = qsa('.panel-item > input[name="item"]', self.dom)
-        let data = []
-        if (items) {
-            items.forEach(it => {
-                data.push({
-                    key: it.getAttribute('key'),
-                    value: it.value,
-                    checked: it.checked
-                })
-            })
-        }
-        callback.call(this, data)
+        callback.call(this, e)
     })
 }
 
@@ -162,7 +160,7 @@ View.prototype.itemAction = function (callback = function(){}) {
             dom = el.parentNode
         }
         let btnCheck = qs('input[name="item"]', dom)
-        btnCheck.checked = !btnCheck.checked
+        btnCheck.checked = !self.multiple || !btnCheck.checked
         let obj = {
             id: btnCheck.getAttribute('key'),
             name: btnCheck.value,
@@ -175,6 +173,17 @@ View.prototype.itemAction = function (callback = function(){}) {
 View.prototype.filterAction = function (callback = function(){}) {
     this.filter.addEventListener('change', function (e) {
         let value = e.target.value
+        callback.call(this, value)
+    })
+}
+
+View.prototype.filterListAction = function(callback = function(){}) {
+    $delegated(this.panel, '.filter-list .filter-item *', 'click', function (e) {
+        let parent = e.target.parentNode
+        let input = qs('input[type="radio"]', parent)
+        input.checked =true
+        let span = qs('.option', parent)
+        let value = span.getAttribute('val')
         callback.call(this, value)
     })
 }

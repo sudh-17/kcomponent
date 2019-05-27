@@ -7,37 +7,12 @@
     <title>ktable</title>
   </head>
   <body>
-    <table id="table" class="ktable">
-      <thead class="kheader">
-        <th class="kth"></th>
-        <th class="kth">xxx</th>
-        <th class="kth">xxx</th>
-        <th class="kth">xxx</th>
-        <th class="kth">xxx</th>
-      </thead>
-      <tbody class="kbody">
-        <tr class="ktr">
-            <td class="ktd">x</td>
-            <td class="ktd" colspan="4">
-              <div style="height: 100px;"> 100 </div>
-            </td>
-          </tr>
-        <tr class="ktr">
-            <td class="ktd">x</td>
-            <td class="ktd">hhhhhh</td>
-            <td class="ktd">hhhhhh</td>
-            <td class="ktd">hhhhhh</td>
-            <td class="ktd">hhhhhh</td>
-          </tr>
-          <tr class="ktr">
-              <td class="ktd">x</td>
-              <td class="ktd">hhhhhh</td>
-              <td class="ktd">hhhhhh</td>
-              <td class="ktd">hhhhhh</td>
-              <td class="ktd">hhhhhh</td>
-            </tr>
-      </tbody>
-    </table>
+    <div>
+      <button type="button" id="btnGet">获取值</button>
+    </div>
+    <div>
+      <table id="table" class="ktable" style="width: 96vw;"></table>
+    </div>
     <script>
 
       let data = [{
@@ -48,7 +23,10 @@
       }, {
         field: 'sex',
         title: '性别',
-        type: 'text',
+        type: 'select',
+        option: [
+          '男','女'
+        ],
         width: ''
       }, {
         field: 'age',
@@ -60,8 +38,21 @@
         title: '职位',
         type: 'text',
         width: ''
+      }, {
+        field: 'desc',
+        title: '描述',
+        type: 'textarea',
+        width: ''
+      }, {
+        field: 'date',
+        title: '入职时间',
+        type: 'date',
+        width: ''
       }]
-      ktable.init(document.getElementById('table'), data)
+      let table = ktable.init(document.getElementById('table'), data)
+      document.getElementById('btnGet').addEventListener('click', function (){
+        console.log('value', table.getValue())
+      })
     </script>
   </body>
 </html>

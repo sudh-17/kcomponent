@@ -29,8 +29,6 @@ function View(dom, data, horizontal = true) {
     this.tbody = qs('tbody', this.table)
     this.status = 'notform'
     this.initAction()
-    console.log('wrapper', this.wrapper)
-
 }
 
 View.prototype.initTable = function (data) {

@@ -19,7 +19,6 @@
         field: 'name',
         title: '姓名',
         type: 'text',
-        width: ''
       }, {
         field: 'sex',
         title: '性别',
@@ -27,31 +26,26 @@
         option: [
           '男','女'
         ],
-        width: ''
       }, {
         field: 'age',
         title: '年龄',
         type: 'number',
-        width: ''
       }, {
         field: 'post',
         title: '职位',
         type: 'text',
-        width: ''
       }, {
         field: 'desc',
         title: '描述',
         type: 'textarea',
-        width: ''
       }, {
         field: 'date',
         title: '入职时间',
         type: 'date',
-        width: ''
       }]
       let table = ktable.init(document.getElementById('table'), data)
       document.getElementById('btnGet').addEventListener('click', function (){
-        //console.log('value', table.getValue())
+        console.log('value', table.getValue())
         alert(JSON.stringify(table.getValue()))
       })
     </script>

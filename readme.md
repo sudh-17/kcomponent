@@ -106,3 +106,49 @@ kchooser.init(dom, data, multi)， 参数分别为挂载点(dom节点)，multi�
 }]
 ```
 >用法可以参考dist目录下的kchooser.html
+
+### 表格
+> 在线示例： https://sudh-17.github.io/kcomponent/dist/ktable.html
+
+> 使用方法:
+
+
+导入目录dist/js下的ktable.min.js
+
+>实例构造器：ktable.init(dom, data)
+
+ktable.init(dom, data) 参数dom为HTML节点（为table元素），data（数组）为表头参数，格式如下数组的每个元素就是一个表头对象，该对象有字段名field，标题title，输入类型type（type有text、select、number、date、password以及textarea 7种输入类型）
+
+```
+let data = [{
+  field: 'name',
+  title: '姓名',
+  type: 'text',
+}, {
+  field: 'sex',
+  title: '性别',
+  type: 'select',
+  option: [
+    '男','女'
+  ],
+}, {
+  field: 'age',
+  title: '年龄',
+  type: 'number',
+}, {
+  field: 'post',
+  title: '职位',
+  type: 'text',
+}, {
+  field: 'desc',
+  title: '描述',
+  type: 'textarea',
+}, {
+  field: 'date',
+  title: '入职时间',
+  type: 'date',
+}]
+```
+> API  getValue()
+
+getValue() 是获取表格输入的所有参数的集合，返回类型是数组，该数组的每个元素对应着表格相应的行的数据id是行的id，data是行的具体数据

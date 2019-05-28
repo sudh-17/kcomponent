@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>ktable_v1</title>
+  </head>
+  <body>
+    <h3>
+      <button type="button" id="btnGet">获取值</button>
+    </h3>
+    <div>
+      <table id="table" class="ktable" style="width: 96vw;"></table>
+    </div>
+    <script>
+
+      let data = [{
+        field: 'name',
+        title: '姓名',
+        type: 'text',
+      }, {
+        field: 'sex',
+        title: '性别',
+        type: 'select',
+        option: [
+          '男','女'
+        ],
+      }, {
+        field: 'age',
+        title: '年龄',
+        type: 'number',
+      }, {
+        field: 'post',
+        title: '职位',
+        type: 'text',
+      }, {
+        field: 'desc',
+        title: '描述',
+        type: 'textarea',
+      }, {
+        field: 'date',
+        title: '入职时间',
+        type: 'date',
+      }]
+      let table = ktable_v1.init(document.getElementById('table'), data)
+      document.getElementById('btnGet').addEventListener('click', function (){
+        console.log('value', table.getValue())
+        alert(JSON.stringify(table.getValue()))
+      })
+    </script>
+  </body>
+</html>

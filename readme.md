@@ -115,9 +115,9 @@ kchooser.init(dom, data, multi)， 参数分别为挂载点(dom节点)，multi�
 
 导入目录dist/js下的ktable.min.js
 
->实例构造器：ktable.init(dom, data)
+>实例构造器：ktable.init(dom, data, horizontal)
 
-ktable.init(dom, data) 参数dom为HTML节点（为table元素），data（数组）为表头参数，格式如下数组的每个元素就是一个表头对象，该对象有字段名field，标题title，输入类型type（type有text、select、number、date、password以及textarea 7种输入类型）
+ktable.init(dom, data, horizontal) 参数dom为HTML节点（为table元素），data（数组）为表头参数，格式如下数组的每个元素就是一个表头对象，该对象有字段名field，标题title，输入类型type（type有text、select、number、date、password以及textarea 7种输入类型）， 参数horizontal(boolean)为列表布局方式，默认为true水平排列，false为竖直排列
 
 ```
 let data = [{

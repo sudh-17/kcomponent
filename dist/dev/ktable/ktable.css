@@ -98,3 +98,26 @@
   text-decoration: none;
   font-size: 13px;
 }
+.kwrapper .ktable .ktbody .ktr .ktd ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.kwrapper .ktable .ktbody .ktr .ktd ul * {
+  box-sizing: border-box;
+}
+.kwrapper .ktable .ktbody .ktr .ktd ul .detail {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #ddd;
+}
+.kwrapper .ktable .ktbody .ktr .ktd ul .detail .detail-key {
+  width: 25vw;
+  text-align: right;
+}
+.kwrapper .ktable .ktbody .ktr .ktd ul .detail .detail-val {
+  padding-left: 5px;
+}
+.kwrapper .ktable .ktbody .ktr .ktd ul li:last-child .detail {
+  border-bottom: none;
+}

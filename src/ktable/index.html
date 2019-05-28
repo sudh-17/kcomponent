@@ -7,9 +7,9 @@
     <title>ktable</title>
   </head>
   <body>
-    <div>
+    <h3>
       <button type="button" id="btnGet">获取值</button>
-    </div>
+    </h3>
     <div>
       <table id="table" class="ktable" style="width: 96vw;"></table>
     </div>
@@ -51,7 +51,8 @@
       }]
       let table = ktable.init(document.getElementById('table'), data)
       document.getElementById('btnGet').addEventListener('click', function (){
-        console.log('value', table.getValue())
+        //console.log('value', table.getValue())
+        alert(JSON.stringify(table.getValue()))
       })
     </script>
   </body>

@@ -16,7 +16,7 @@
   button {
     -webkit-appearance: button;
     outline: 0;
-    line-height: 24px;
+    line-height: 28px;
     display: inline-block;
     font-weight: 400;
     text-align: center;
@@ -26,7 +26,7 @@
     border: 1px solid transparent;
     white-space: nowrap;
     padding: 0 10px;
-    height: 24px;
+    height: 28px;
     font-size: 14px;
     border-radius: 4px;
     -webkit-user-select: none;
@@ -55,6 +55,21 @@
         border: 1px solid #ddd;
         text-align: center;
         font-weight: normal;
+      }
+    }
+    input[name^="toggle"] {
+      & + label {
+        display: block;
+        width: 20px;
+        height: 20px;
+        background: url(../assets/unChecked.png) no-repeat;
+        background-size: 100% 100%;
+      }
+      &:checked + label {
+        display: block;
+        width: 20px;
+        height: 20px;
+        background: url(../assets/checked.png) no-repeat;
       }
     }
     .ktbody {

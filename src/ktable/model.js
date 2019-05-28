@@ -20,4 +20,13 @@ Model.prototype.del = function (id, callback = function () {}) {
     this.data.splice(index, 1)
     callback.call(this, id)
 }
+
+Model.prototype.batchDel = function (ids = [], callback = function () {}) {
+    ids.forEach(id => {
+        let index = this.data.findIndex(item => item.id === id)
+        this.data.splice(index, 1)
+    })
+    callback.call(this, ids)
+}
+
 export default Model

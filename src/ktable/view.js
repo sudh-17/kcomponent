@@ -27,6 +27,7 @@ function View(dom, data) {
     this.initTable(data)
     this.tbody = qs('tbody', this.table)
     this.status = 'notform'
+    this.initAction()
 }
 
 View.prototype.initTable = function (data) {
@@ -117,6 +118,8 @@ View.prototype.appendForm = function () {
     if(this.status === 'notform') {
         this.tbody.appendChild(this.formTemplate())
         this.status = 'form'
+    } else {
+        alert('当前有未处理的行！')
     }
 }
 
@@ -143,7 +146,16 @@ View.prototype.btnAddAction = function (callback = function () {}) {
 
 View.prototype.btnDelAction = function (callback = function () {}) {
     $delegated(this.parent, '.btnDel', 'click', function () {
-        callback.call(this)
+        let ids = []
+        let rows = qsa('.ktr', this.tbody)
+        rows.forEach(item => {
+            let checkbox = qs('input[name="toggle"]', item)
+            if (checkbox && checkbox.checked) {
+                ids.push(item.getAttribute('data-id'))
+            }
+        })
+        qs('input[name="toggleAll"]', this.table).checked = false
+        callback.call(this, ids)
     })
 }
 
@@ -170,28 +182,34 @@ View.prototype.btnDeleteRowAction = function (callback = function(){}) {
     })
 }
 
-View.prototype.toggleAllAction = function (callback = function () {}) {
+View.prototype.toggleAllAction = function () {
     $delegated(this.table, 'input[name="toggleAll"]', 'click', function (e) {
         let toggleAll = e.target
         let toggles = qsa('input[name="toggle"]', this.table)
         toggles.forEach(item => {
             item.checked = toggleAll.checked
         })
-        callback.call(this)
     })
 }
 
-// TODO
-View.prototype.toggleAction = function (callback = function () {}) {
+View.prototype.toggleAction = function () {
     $delegated(this.table, 'input[name="toggle"]', 'click', function (e) {
-        let toggle = e.target
         let toggles = qsa('input[name="toggle"]', this.table)
         let flag = true
         toggles.forEach(item => {
-            if (item.checked) {}
+            if (item.checked === false) {
+                flag = false
+            }
         })
-        callback.call(this)
+        let toggleAll = qs('input[name="toggleAll"]', this.table)
+        toggleAll.checked = flag
     })
+}
+
+// 初始化事件
+View.prototype.initAction = function () {
+    this.toggleAllAction()
+    this.toggleAction()
 }
 
 export default View

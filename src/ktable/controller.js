@@ -18,8 +18,16 @@ Controller.prototype.initAction = function () {
     this.view.btnAddAction(function () {
         self.view.appendForm()
     })
-    this.view.btnDelAction(function () {
-        console.log('del')
+    this.view.btnDelAction(function (ids) {
+        if (!ids || ids.length == 0) {
+            alert('请选择要删除的行！')
+            return
+        }
+        self.model.batchDel(ids, function (ids) {
+            ids.forEach(id => {
+                self.view.removeRow(id)
+            })
+        })
     })
     this.view.btnOkAction(function (uuid, params) {
         let item = {
@@ -37,9 +45,6 @@ Controller.prototype.initAction = function () {
         self.model.del(id, function (id) {
             self.view.removeRow(id)
         })
-    })
-    this.view.toggleAllAction(function () {
-        
     })
 }
 

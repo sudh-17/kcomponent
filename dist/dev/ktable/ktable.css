@@ -1,0 +1,100 @@
+.kwrapper {
+  display: inline-block;
+}
+.kwrapper div {
+  box-sizing: border-box;
+}
+.kwrapper .toolbar {
+  border: 1px solid #ddd;
+  border-bottom: none;
+  display: flex;
+  justify-content: flex-end;
+  padding: 2px 4px 3px 3px;
+}
+.kwrapper .toolbar .btn-gb {
+  max-width: 120px;
+}
+.kwrapper button {
+  -webkit-appearance: button;
+  outline: 0;
+  line-height: 28px;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 0 10px;
+  height: 28px;
+  font-size: 14px;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  position: relative;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+  color: rgba(0, 0, 0, 0.65);
+  background-color: #fff;
+  border-color: #d9d9d9;
+}
+.kwrapper .kprimary {
+  color: #fff;
+  background-color: #1890ff;
+  border-color: #1890ff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}
+.kwrapper .kwarnnig {
+  color: #fff;
+  background-color: #ff9600;
+  border-color: #ff9600;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}
+.kwrapper .ktable {
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+.kwrapper .ktable .kheader .kth {
+  border: 1px solid #ddd;
+  text-align: center;
+  font-weight: normal;
+}
+.kwrapper .ktable input[name^="toggle"]  + label {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: url(../assets/unChecked.png) no-repeat;
+  background-size: 100% 100%;
+}
+.kwrapper .ktable input[name^="toggle"]:checked + label {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: url(../assets/checked.png) no-repeat;
+}
+.kwrapper .ktable .ktbody .ktr .ktd {
+  border: 1px solid #ddd;
+  text-align: center;
+}
+.kwrapper .ktable .ktbody .ktr .ktd .field-con {
+  margin: 3px 0;
+  display: flex;
+  flex-direction: row;
+}
+.kwrapper .ktable .ktbody .ktr .ktd .field-con .field-la {
+  width: 80px;
+  text-align: right;
+  padding-right: 3px;
+}
+.kwrapper .ktable .ktbody .ktr .ktd .form-footer {
+  padding: 3px 0;
+}
+.kwrapper .ktable .ktbody .ktr .ktd a {
+  text-decoration: none;
+  font-size: 13px;
+}

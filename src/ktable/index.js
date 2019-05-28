@@ -1,8 +1,8 @@
 import './index.less'
 import Controller from './controller.js'
 
-function init (dom, data) {
-  return new Controller(dom, data)
+function init (dom, data, horizontal) {
+  return new Controller(dom, data, horizontal)
 }
 
 let ktable = {}

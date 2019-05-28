@@ -8,10 +8,19 @@
   </head>
   <body>
     <h3>
+      横向排列
       <button type="button" id="btnGet">获取值</button>
     </h3>
     <div>
       <table id="table" class="ktable" style="width: 96vw;"></table>
+    </div>
+
+    <h3>
+      竖直排列
+      <button type="button" id="btnGet2">获取值</button>
+    </h3>
+    <div>
+      <table id="table2" class="ktable" style="width: 96vw;"></table>
     </div>
     <script>
 
@@ -43,10 +52,16 @@
         title: '入职时间',
         type: 'date',
       }]
-      let table = ktable.init(document.getElementById('table'), data)
+      let table = ktable.init(document.getElementById('table'), data, true)
       document.getElementById('btnGet').addEventListener('click', function (){
         console.log('value', table.getValue())
         alert(JSON.stringify(table.getValue()))
+      })
+
+      let table2 = ktable.init(document.getElementById('table2'), JSON.parse(JSON.stringify(data)), false)
+      document.getElementById('btnGet2').addEventListener('click', function (){
+        console.log('value', table2.getValue())
+        alert(JSON.stringify(table2.getValue()))
       })
     </script>
   </body>

@@ -4,15 +4,16 @@ import { qs, qsa, $delegated, createUUID, getFormParams } from '../util/common.j
  * View
  * @param {挂载节点} dom 
  */
-function View(dom, data) {
+function View(dom, data, horizontal = true) {
     this.dom = dom
     this.data = data
+    this.horizontal = horizontal
     this.parent = dom.parentNode
     this.dom.className = 'ktable'
     let outerHTML = this.dom.outerHTML
     let uuid = createUUID()
     let html = `
-        <div class="kwrapper" id="${ uuid }">
+        <div class="kwrapper" w-id="${ uuid}">
             <div class="toolbar">
                 <div class="btn-gb">
                     <button class="btnAdd kprimary">添加</button>
@@ -22,19 +23,21 @@ function View(dom, data) {
             ${ outerHTML}
         </div>`
     this.dom.outerHTML = html
-    this.wrapper = qs(`[id="#${ uuid }"]`, this.parentNode)
+    this.wrapper = qs(`[w-id="${ uuid }"]`, this.parent)
     this.table = qs('.ktable', this.wrapper)
     this.initTable(data)
     this.tbody = qs('tbody', this.table)
     this.status = 'notform'
     this.initAction()
+    console.log('wrapper', this.wrapper)
+
 }
 
 View.prototype.initTable = function (data) {
     let html = `
         <thead class="kheader">
             <th class="kth" style="width: 26px;"><input type="checkbox" name="toggleAll"/></th>
-            ${ this.createTitle(data) }
+            ${ this.createTitle(data)}
         </thead>
         <tbody class="ktbody"></tbody>
         `
@@ -50,15 +53,41 @@ View.prototype.createTitle = function (data) {
     return html
 }
 
+
+View.prototype.getTitleByField = function (field) {
+    for (let i = 0; i < this.data.length; i++) {
+        if (this.data[i].field === field) {
+            return this.data[i].title
+        }
+    }
+    return ''
+}
+
 View.prototype.createTrTemplate = function (uuid, params) {
-    let tr =  document.createElement('tr')
+    let html = ''
+    if (this.horizontal === true) {
+        html = `<td class="ktd"><input type="checkbox" name="toggle"/></td>`
+        Object.keys(params).forEach(key => {
+            html += `<td class="ktd">${params[key]}</td>`
+        })
+        html += `<td class="ktd"><a class="del-row" href="javascript:;" data-id="${uuid}">删除</a></td>`
+    } else {
+        let li = ''
+        Object.keys(params).forEach(key => {
+            li += `<li><div class="detail">
+            <div class="detail-key"><label>${ this.getTitleByField(key)} : <label></div>
+            <div class="detail-val"> ${ params[key]}</div></div>
+            </li>`
+        })
+        html = `<td class="ktd"><input type="checkbox" name="toggle"/></td>
+        <td class="ktd" colspan="${ this.data.length}"><ul>${li}</ul></td>
+        <td class="ktd">
+        <a class="del-row" href="javascript:;" data-id="${ uuid}">删除</a>
+        </td>`
+    }
+    let tr = document.createElement('tr')
     tr.setAttribute('data-id', uuid)
     tr.className = 'ktr'
-    let html= `<td class="ktd"><input type="checkbox" name="toggle"/></td>`
-    Object.keys(params).forEach(key => {
-        html += `<td class="ktd">${ params[key] }</td>`
-    })
-    html += `<td class="ktd"><a class="del-row" href="javascript:;" data-id="${ uuid }">删除</a></td>`
     tr.innerHTML = html
     return tr
 }
@@ -70,44 +99,44 @@ View.prototype.formTemplate = function () {
         if (item.type === 'text' || item.type === 'number' || item.type === 'date' || item.type === 'password') {
             fields += `<div class="field-con">
                 <div class="field-la">
-                    <label>${ item.title }: </label>
+                    <label>${ item.title}: </label>
                 </div>
                 <div class="field-item">
-                    <input name="${ item.field }" type="${ item.type }"/>
+                    <input name="${ item.field}" type="${item.type}"/>
                 </div>
             </div>`
         } else if (item.type == 'textarea') {
             fields += `<div class="field-con">
                 <div class="field-la">
-                    <label>${ item.title }: </label>
+                    <label>${ item.title}: </label>
                 </div>
                 <div class="field-item">
-                    <textarea name="${ item.field }"></textarea>
+                    <textarea name="${ item.field}"></textarea>
                 </div>
             </div>`
         } else if (item.type == 'select') {
             fields += `<div class="field-con">
                 <div class="field-la">
-                    <label>${ item.title }: </label>
+                    <label>${ item.title}: </label>
                 </div>
                 <div class="field-item">
-                    <select name="${ item.field }">
-                        <option>${ item.option.join('</option><option>') }</option>
+                    <select name="${ item.field}">
+                        <option>${ item.option.join('</option><option>')}</option>
                     </select>
                 </div>
             </div>`
         }
     })
     let footer = `<div class="form-footer">
-            <button data-id="${ uuid }" type="button" class="row-cancel">取消</button>
-            <button data-id="${ uuid }" type="button" class="row-ok kprimary">确定</button>
+            <button data-id="${ uuid}" type="button" class="row-cancel">取消</button>
+            <button data-id="${ uuid}" type="button" class="row-ok kprimary">确定</button>
         </div>`
-    let tr =  document.createElement('tr')
+    let tr = document.createElement('tr')
     tr.className = 'ktr'
     tr.setAttribute('data-id', uuid)
-    let html= `
+    let html = `
         <td class="ktd"></td>
-        <td class="ktd" colspan="${ this.data.length + 1 }"><form data-id="${ uuid }">${ fields + footer }</form></td>
+        <td class="ktd" colspan="${ this.data.length + 1}"><form data-id="${uuid}">${fields + footer}</form></td>
         `
     tr.innerHTML = html
     return tr
@@ -115,7 +144,7 @@ View.prototype.formTemplate = function () {
 
 
 View.prototype.appendForm = function () {
-    if(this.status === 'notform') {
+    if (this.status === 'notform') {
         this.tbody.appendChild(this.formTemplate())
         this.status = 'form'
     } else {
@@ -124,7 +153,7 @@ View.prototype.appendForm = function () {
 }
 
 View.prototype.removeRow = function (uuid) {
-    let tr = qs(`tr[data-id="${ uuid }"]`, this.tbody)
+    let tr = qs(`tr[data-id="${uuid}"]`, this.tbody)
     this.tbody.removeChild(tr)
     this.status = 'notform'
 }
@@ -138,13 +167,13 @@ View.prototype.appendRow = function (uuid, params) {
 }
 
 // ACTION
-View.prototype.btnAddAction = function (callback = function () {}) {
+View.prototype.btnAddAction = function (callback = function () { }) {
     $delegated(this.parent, '.btnAdd', 'click', function () {
         callback.call(this)
     })
 }
 
-View.prototype.btnDelAction = function (callback = function () {}) {
+View.prototype.btnDelAction = function (callback = function () { }) {
     $delegated(this.parent, '.btnDel', 'click', function () {
         let ids = []
         let rows = qsa('.ktr', this.tbody)
@@ -159,23 +188,23 @@ View.prototype.btnDelAction = function (callback = function () {}) {
     })
 }
 
-View.prototype.btnOkAction = function (callback = function(){}) {
+View.prototype.btnOkAction = function (callback = function () { }) {
     $delegated(this.tbody, '.row-ok', 'click', function (e) {
         let uuid = e.target.getAttribute('data-id')
-        let form = qs(`form[data-id="${ uuid }"]`, this.tbody)
+        let form = qs(`form[data-id="${uuid}"]`, this.tbody)
         let params = getFormParams(form)
         callback.call(this, uuid, params)
     })
 }
 
-View.prototype.btnCancelAction = function (callback = function(){}) {
+View.prototype.btnCancelAction = function (callback = function () { }) {
     $delegated(this.tbody, '.row-cancel', 'click', function (e) {
         let uuid = e.target.getAttribute('data-id')
         callback.call(this, uuid)
     })
 }
 
-View.prototype.btnDeleteRowAction = function (callback = function(){}) {
+View.prototype.btnDeleteRowAction = function (callback = function () { }) {
     $delegated(this.tbody, '.del-row', 'click', function (e) {
         let uuid = e.target.getAttribute('data-id')
         callback.call(this, uuid)

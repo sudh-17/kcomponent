@@ -6,9 +6,9 @@ import View from './view.js'
  * @param {挂载点} dom 
  * @param {数据源} data 
  */
-function Controller(dom, data) {
+function Controller(dom, data, horizontal) {
     this.model = new Model()
-    this.view = new View(dom, data)
+    this.view = new View(dom, data, horizontal)
     this.initAction()
 }
 

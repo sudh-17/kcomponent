@@ -12,7 +12,7 @@ function View(dom, data) {
     let outerHTML = this.dom.outerHTML
     let uuid = createUUID()
     let html = `
-        <div class="kwrapper" id="${ uuid}">
+        <div class="kwrapper" w-id="${ uuid}">
             <div class="toolbar">
                 <div class="btn-gb">
                     <button class="btnAdd kprimary">添加</button>
@@ -22,7 +22,7 @@ function View(dom, data) {
             ${ outerHTML}
         </div>`
     this.dom.outerHTML = html
-    this.wrapper = qs(`[id="#${uuid}"]`, this.parentNode)
+    this.wrapper = qs(`[w-id="${uuid}"]`, this.parentNode)
     this.table = qs('.ktable', this.wrapper)
     this.initTable(data)
     this.tbody = qs('tbody', this.table)

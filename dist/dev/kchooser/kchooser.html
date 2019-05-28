@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>kchooser</title>
+  <link rel="stylesheet" href="./kchooser.css">
+  <script src="../common.js"></script>
+  <script src="./kchooser.js"></script>
+
+<body>
+  <div>
+    <h3>单选模式</h3>
+    <input name="name" id="select1" />
+    <input name="id" id="select11" />
+  </div>
+  <div>
+    <h3>多选模式</h3>
+    <input name="name" id="select2" />
+    <input name="id" id="select22" />
+  </div>
+  <script>
+    const data = [
+      {
+        "id": "C3E8bD41-a66d-937E-536b-f4b2675FdDAD",
+        "name": "冯平",
+        "department": "同部门"
+      },
+      {
+        "id": "ee5ddFfe-8D2d-8BCc-8cCc-7edF544Cd8F7",
+        "name": "石伟",
+        "department": "常用人"
+      },
+      {
+        "id": "087A95dB-9C3B-A121-D8F6-89C58C654c8e",
+        "name": "毛杰",
+        "department": "同部门"
+      },
+      {
+        "id": "7c1b0c1c-f39C-BAE3-cDe5-b4c791cF8bB9",
+        "name": "顾超",
+        "department": "同部门"
+      },
+      {
+        "id": "1dF672b9-eCff-67BE-E35F-C9F80b3d8e9D",
+        "name": "钱娜",
+        "department": "同部门"
+      },
+      {
+        "id": "1E6ae345-EEbe-94BF-513d-FeDF5dFBe3F5",
+        "name": "蔡明",
+        "department": "常用人"
+      },
+      {
+        "id": "942DB20f-Ea5c-ed25-d1bD-Ac79f1dBd2E9",
+        "name": "曾艳",
+        "department": "常用人"
+      },
+      {
+        "id": "656dCb4C-EA4b-6d9a-1cC6-7f93cfb328dF",
+        "name": "侯霞",
+        "department": "同部门"
+      },
+      {
+        "id": "eBc97A1c-f38f-aC7c-FD44-1AfBCcDEed4f",
+        "name": "石涛",
+        "department": "同部门"
+      },
+      {
+        "id": "E1F5d7fC-F2CD-774d-8ecC-09984F69f60D",
+        "name": "朱伟",
+        "department": "同部门"
+      },
+      {
+        "id": "DdBC1b1E-3F1C-DE9c-C111-3ebD6e7D0baf",
+        "name": "龙秀英",
+        "department": "常用人"
+      },
+      {
+        "id": "7BF7d7aD-3Ee8-5787-E565-7dFAbB86a9a4",
+        "name": "何伟",
+        "department": "常用人"
+      },
+      {
+        "id": "0e37280F-B127-Cd61-3dc5-cE9F7b1ccEeb",
+        "name": "孔敏",
+        "department": "常用人"
+      },
+      {
+        "id": "E5fcb7bC-5Bf8-A2E1-EB7B-ce237E288De5",
+        "name": "尹明",
+        "department": "常用人"
+      },
+      {
+        "id": "86eAbfD4-5982-8Bbe-24DD-ECeB727ebc91",
+        "name": "雷杰",
+        "department": "常用人"
+      }
+    ]
+
+    let single = kchooser.init(document.getElementById('select1'), data, false)
+    single.onConfirm(function () {
+      let values = single.getValue()
+      let names = []
+      let ids = []
+      values.forEach(item => {
+        names.push(item.name)
+        ids.push(item.id)
+      })
+      document.getElementById('select1').value = names.join(',')
+      document.getElementById('select11').value = ids.join(',')
+    })
+
+    let multi = kchooser.init(document.getElementById('select2'), JSON.parse(JSON.stringify(data)), true)
+    multi.onConfirm(function () {
+      let values = multi.getValue()
+      let names = []
+      let ids = []
+      values.forEach(item => {
+        names.push(item.name)
+        ids.push(item.id)
+      })
+      document.getElementById('select2').value = names.join(',')
+      document.getElementById('select22').value = ids.join(',')
+    })
+
+
+  </script>
+</body>
+
+</html>

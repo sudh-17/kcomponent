@@ -160,7 +160,6 @@ View.prototype.removeRow = function (uuid) {
 
 View.prototype.appendRow = function (uuid, params) {
     let tr = this.createTrTemplate(uuid, params)
-    // tr.setAttribute('data-id', uuid)
     this.removeRow(uuid)
     this.tbody.appendChild(tr)
     this.status = 'notform'
@@ -225,15 +224,16 @@ View.prototype.toggleAllAction = function () {
 }
 
 View.prototype.toggleAction = function () {
+    let self = this
     $delegated(this.table, 'input[name="toggle"]', 'click', function (e) {
-        let toggles = qsa('input[name="toggle"]', this.table)
+        let toggles = qsa('input[name="toggle"]', self.table)
         let flag = true
         toggles.forEach(item => {
             if (item.checked === false) {
                 flag = false
             }
         })
-        let toggleAll = qs('input[name="toggleAll"]', this.table)
+        let toggleAll = qs('input[name="toggleAll"]', self.table)
         toggleAll.checked = flag
     })
 }

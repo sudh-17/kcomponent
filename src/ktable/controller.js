@@ -23,6 +23,10 @@ Controller.prototype.initAction = function () {
             alert('请选择要删除的行！')
             return
         }
+        let flag = confirm('确定要删除吗？')
+        if (!flag) {
+            return
+        }
         self.model.batchDel(ids, function (ids) {
             ids.forEach(id => {
                 self.view.removeRow(id)

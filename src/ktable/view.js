@@ -68,7 +68,6 @@ View.prototype.createTrTemplate = function (uuid, params) {
         Object.keys(params).forEach(key => {
             html += `<td class="ktd">${params[key]}</td>`
         })
-        html += `<td class="ktd"><a class="del-row" href="javascript:;" data-id="${uuid}">删除</a></td>`
     } else {
         let li = ''
         Object.keys(params).forEach(key => {
@@ -78,11 +77,14 @@ View.prototype.createTrTemplate = function (uuid, params) {
             </li>`
         })
         html = `<td class="ktd"><input type="checkbox" name="toggle"/></td>
-        <td class="ktd" colspan="${ this.data.length}"><ul>${li}</ul></td>
-        <td class="ktd">
-        <a class="del-row" href="javascript:;" data-id="${ uuid}">删除</a>
-        </td>`
+        <td class="ktd" colspan="${ this.data.length}"><ul>${li}</ul></td>`
     }
+    html += `<td class="ktd">
+            <div style="padding: 5px 2px;">
+                <a class="del-row" href="javascript:;" data-id="${uuid}" style="display: block; margin-bottom: 10px;">删除</a>
+                <a class="edit-row" href="javascript:;" data-id="${ uuid}">修改</a>
+            </div>
+        </td>`
     let tr = document.createElement('tr')
     tr.setAttribute('data-id', uuid)
     tr.className = 'ktr'
@@ -181,7 +183,6 @@ View.prototype.btnDelAction = function (callback = function () { }) {
                 ids.push(item.getAttribute('data-id'))
             }
         })
-        qs('input[name="toggleAll"]', this.table).checked = false
         callback.call(this, ids)
     })
 }
@@ -204,6 +205,10 @@ View.prototype.btnCancelAction = function (callback = function () { }) {
 
 View.prototype.btnDeleteRowAction = function (callback = function () { }) {
     $delegated(this.tbody, '.del-row', 'click', function (e) {
+        let flag = confirm('确定要删除吗？')
+        if (!flag) {
+            return
+        }
         let uuid = e.target.getAttribute('data-id')
         callback.call(this, uuid)
     })
@@ -233,10 +238,33 @@ View.prototype.toggleAction = function () {
     })
 }
 
+//使用观察者模式
+View.prototype.tbodyAction = function () {
+    let self = this
+    let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
+    let observer = new MutationObserver((mutationList) => {
+      for (let mutation of mutationList) {
+        if (mutation.type === 'childList') {
+          let toggles = qsa('input[name="toggle"]', self.table)
+          let flag = toggles.length !== 0
+          toggles.forEach(item => {
+              if (item.checked === false) {
+                  flag = false
+              }
+          })
+          let toggleAll = qs('input[name="toggleAll"]', self.table)
+          toggleAll.checked = flag
+        }
+      }
+    })
+    observer.observe(this.tbody, { childList: true })
+}
+
 // 初始化事件
 View.prototype.initAction = function () {
     this.toggleAllAction()
     this.toggleAction()
+    this.tbodyAction()
 }
 
 export default View
